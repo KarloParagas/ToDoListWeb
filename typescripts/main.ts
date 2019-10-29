@@ -12,7 +12,20 @@ class ToDoItem{
     }   
 }
 
-let myItem = new ToDoItem("Finish class");
+/* Test code here... */
+let myItem = new ToDoItem("Learn about cookies=;");
+myItem.isCompleted = false;
+
+//October 20th 2019. Month starts at 0.
+myItem.deadline = new Date(2019, 9, 29);
+
+//stringify converts any object into a JSON string format
+let strData = JSON.stringify(myItem);
+console.log(strData);
+
+//Setting a cookie called 'todoitems' that expires in a week
+Cookies.set("todoitems", strData, {expires : 7});
+/* END TEST CODE */
 
 window.onload = function(){
     let addBtn = <HTMLElement>document.querySelector("form > input[type=button]");
