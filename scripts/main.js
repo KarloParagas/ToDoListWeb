@@ -15,9 +15,28 @@ myItem.deadline = new Date(2019, 9, 29);
 //stringify converts any object into a JSON string format
 var strData = JSON.stringify(myItem);
 console.log(strData);
+var cookieKey = "todoitems";
 //Setting a cookie called 'todoitems' that expires in a week
-Cookies.set("todoitems", strData, { expires: 7 });
+Cookies.set(cookieKey, strData, { expires: 7 });
 /* END TEST CODE */
+//Read ToDoItem from cookie
+var cookieItem = JSON.parse(Cookies.get(cookieKey)); //JSON.parse converts that cookie passed, back to an object
+console.log("Read cookie data...");
+console.log(cookieItem.title + " " + cookieItem.deadline);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* TEST CODE: Store ToDo item using HTML5 Web Storage */
+var storageKey = "Task";
+if (typeof (Storage) !== "undefined") {
+    localStorage.setItem(storageKey, strData);
+    //the key can be whatever you want it to be for ".setItem(key: string, value: string)"
+    //"task" is the name of that cookie, like an id
+    var storageStr = localStorage.getItem(storageKey);
+    var item = JSON.parse(storageStr);
+    console.log("Reading storage data...");
+    console.log(item.title);
+}
+/* END OF TEST CODE */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 window.onload = function () {
     var addBtn = document.querySelector("form > input[type=button]");
     addBtn.onclick = main;
@@ -27,7 +46,13 @@ function main() {
     var item = getItem();
     //Display new ToDoItem on page
     displayToDoItem(item);
-    //Save ToDoItem
+    //Get existing ToDos, add new one, re-save list
+    var allItems = readToDoItems();
+    allItems.push(item); //Add new item to existing list
+    saveToDoItems(allItems);
+    for (var i = 0; i < allItems.length; i++) {
+        alert(allItems[i].title);
+    }
 }
 /**
  * Move selected task to completed section of the webpage
@@ -60,4 +85,19 @@ function getItem() {
     item.deadline = new Date(deadline);
     item.isCompleted = false;
     return item;
+}
+var theStorageKey = "MyItems";
+function saveToDoItems(items) {
+    var stringData = JSON.stringify(items);
+    localStorage.setItem(theStorageKey, stringData);
+}
+function readToDoItems() {
+    var stringData = localStorage.getItem(theStorageKey);
+    if (stringData == null) {
+        return new Array();
+    }
+    // let itemArray:ToDoItem[] = JSON.parse(stringData);
+    // return itemArray;
+    //Same as above, as a one liner
+    return JSON.parse(stringData);
 }
