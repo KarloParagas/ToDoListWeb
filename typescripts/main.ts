@@ -69,10 +69,6 @@ function main(){
     let allItems = readToDoItems();
     allItems.push(item); //Add new item to existing list
     saveToDoItems(allItems);
-
-    for(let i = 0; i < allItems.length; i++){
-        alert(allItems[i].title);
-    }
 }
 
 /**

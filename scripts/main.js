@@ -50,9 +50,6 @@ function main() {
     var allItems = readToDoItems();
     allItems.push(item); //Add new item to existing list
     saveToDoItems(allItems);
-    for (var i = 0; i < allItems.length; i++) {
-        alert(allItems[i].title);
-    }
 }
 /**
  * Move selected task to completed section of the webpage
