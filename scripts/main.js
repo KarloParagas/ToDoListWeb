@@ -93,9 +93,6 @@ function readToDoItems() {
     if (stringData == null) {
         return new Array();
     }
-    // let itemArray:ToDoItem[] = JSON.parse(stringData);
-    // return itemArray;
-    //Same as above, as a one liner
     return JSON.parse(stringData);
 }
 function clearList() {
