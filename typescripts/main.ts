@@ -132,3 +132,8 @@ function readToDoItems():Array<ToDoItem>{
     //Same as above, as a one liner
     return <ToDoItem[]>JSON.parse(stringData);
 }
+
+function clearList(){
+    document.getElementById("todo").innerHTML = "";
+    document.getElementById("completed").innerHTML = "";
+}

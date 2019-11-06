@@ -98,3 +98,7 @@ function readToDoItems() {
     //Same as above, as a one liner
     return JSON.parse(stringData);
 }
+function clearList() {
+    document.getElementById("todo").innerHTML = "";
+    document.getElementById("completed").innerHTML = "";
+}
